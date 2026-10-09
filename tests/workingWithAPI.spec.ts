@@ -1,5 +1,5 @@
 import { test, expect, request } from '@playwright/test';
-import tags from '../test-data/tags.json'; 
+import tags from '../test-data/tags.json';
 //Users/P00922107/bodnar_academy/PW-APITEST-APP/test-data/tags.json
 import * as path from 'path';
 import dotenv from 'dotenv';
@@ -23,10 +23,10 @@ test.beforeEach(async ({ page }) => {
 test('has title', async ({ page }) => {
   await page.route('*/**/api/articles*', async route =>{
     const response = await route.fetch()
-    const responseBody = await response.json() 
+    const responseBody = await response.json()
     responseBody.articles[0].title = "This is a MOCK test title"
     responseBody.articles[0].description = "This is a MOCK description"
-    
+
     await route.fulfill({
       body: JSON.stringify(responseBody)
     })
@@ -120,7 +120,7 @@ test('Create article', async ({page, request}) =>{
    })
    //console.log('Login status:', loginResponse.status());
    //console.log('Login body:', await loginResponse.text());
-  
+
    expect(loginResponse.status()).toEqual(200)
    const responseLoginJSON = await loginResponse.json()
    const token = responseLoginJSON.user.token
